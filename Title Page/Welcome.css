@@ -1,4 +1,10 @@
-h1
+body
 {
+  background-color: black;
+
+  font-family: Arial, sans-serif;
+
   text-align: center;
+
+  color: white;
 }
