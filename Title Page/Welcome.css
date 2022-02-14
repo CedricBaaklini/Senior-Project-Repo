@@ -1,3 +1,6 @@
+
+//* Styling the entire site *//
+
 body
 {
   background-color: black;
@@ -7,4 +10,11 @@ body
   text-align: center;
 
   color: white;
+}
+
+//* Styling perticular elements *//
+
+li
+{
+  display: inline;
 }
