@@ -2,7 +2,7 @@
 
 function hover()
 {
-  var x = document.getElementById('topnav');
+  var x = document.getElementById("myTopnav");
 
   if (x.className === "topnav")
   {
@@ -11,6 +11,6 @@ function hover()
 
   else
   {
-    x.className = "topnav";  
+    x.className = "topnav";
   }
 }
