@@ -95,3 +95,103 @@ body
     text-align: left;
   }
 }
+
+/* Styling the log in page */
+
+form
+{
+  border: 3px solid gray;
+
+  text-align: left;
+}
+
+input[type=text], input[type=password]
+{
+  background-color: silver;
+
+  width: 100%;
+
+  padding: 12px 20px;
+
+  margin: 8px 0;
+
+  display: inline-block;
+
+  border: 1px solid gray;
+
+  box-sizing: border-box;
+}
+
+button
+{
+  background-color: gray;
+
+  color: black;
+
+  padding: 14px 20px;
+
+  margin: 8px 0;
+
+  border: none;
+
+  cursor: pointer;
+
+  width: 100%;
+
+  font-size: large;
+}
+
+button:hover
+{
+  opacity: 0.75;
+}
+
+.cancelbtn
+{
+  width: auto;
+
+  padding: 10px 18px;
+
+  background-color: silver;
+}
+
+.imgcontainer
+{
+  text-align: center;
+
+  margin: 24px 0 12px 0;
+}
+
+img.avatar
+{
+  width: 40%;
+
+  border-radius: 50%;
+}
+
+.container
+{
+  padding: 16px;
+}
+
+span.psw
+{
+  float: right;
+
+  padding-top: 16px;
+}
+
+@media screen and (max-width: 300px)
+{
+  span.psw
+  {
+    display: block;
+
+    float: none;
+  }
+
+  .cancelbtn
+  {
+    width: 100%;
+  }
+}
