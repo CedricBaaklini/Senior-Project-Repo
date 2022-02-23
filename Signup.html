@@ -4,7 +4,82 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="Style.css">
     <style media="screen">
+      *
+      {
+        box-sizing: border-box;
+      }
 
+      input[type=text], input[type=password]
+      {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: silver;
+      }
+
+      input[type=text]:focus, input[type=password]:focus
+      {
+        background-color: gray;
+        outline: none;
+      }
+
+      hr
+      {
+        border: 1px solid gray;
+        margin-bottom: 25px;
+      }
+
+      button
+      {
+        background-color: #D3D3D3;
+        color: black;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+      }
+
+      button:hover
+      {
+        opacity:1;
+      }
+
+      .cancelbtn
+      {
+        padding: 14px 20px;
+        background-color: #696969;
+        color: white;
+      }
+
+      .cancelbtn, .signupbtn
+      {
+        float: left;
+        width: 50%;
+      }
+
+      .container:
+      {
+        padding: 16px;
+      }
+
+      .clearfix:after
+      {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+      @media screen and (max-width: 300px)
+      {
+        .cancelbtn, .signupbtn
+        {
+          width: 100%;
+        }
+      }
     </style>
     <script type="text/javascript" src="Script.js">  </script>
     <title> Sign up </title>
@@ -53,7 +128,12 @@
           <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">
           Remember me
         </label>
-        <p> By creating your account, you agree to our  </p>
+        <p> By creating your account, you agree to our <a href="#" style="color:silver"> Terms of Service </a> </p>
+      </div>
+
+      <div class="clearfix">
+        <button type="button" class="cancelbtn"> Cancel </button>
+        <button type="button" class="signupbtn"> Sign Up </button>
       </div>
 
     </form>
