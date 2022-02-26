@@ -107,7 +107,7 @@ form
 
 input[type=text], input[type=password]
 {
-  background-color: silver;
+  background-color: white;
 
   width: 100%;
 
@@ -194,4 +194,11 @@ span.psw
   {
     width: 100%;
   }
+}
+
+/* Formatting error message */
+
+.error
+{
+  color: red;
 }
