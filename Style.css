@@ -11,6 +11,19 @@ body
   color: white;
 }
 
+/* Styling images */
+
+img
+{
+  display: block;
+
+  margin-left: auto;
+
+  margin-right: auto;
+
+  width: 50%;
+}
+
 /* Styling Nav bar */
 
 .topnav
@@ -201,4 +214,44 @@ span.psw
 .error
 {
   color: red;
+}
+
+/* Search Menu Style */
+
+#mySearch
+{
+  width: 100%;
+
+  font-size: 18px;
+
+  padding: 11px;
+
+  border: 1px solid gray;
+}
+
+#myMenu
+{
+  list-style-type: none;
+
+  padding: 0;
+
+  margin: 0;
+}
+
+#myMenu li a
+{
+  padding: 12px;
+
+  text-decoration: none;
+
+  background-color: gray;
+
+  color: black;
+
+  display: block;
+}
+
+#myMenu li a:hover
+{
+  background-color: silver;
 }
