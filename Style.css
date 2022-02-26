@@ -11,6 +11,19 @@ body
   color: white;
 }
 
+/* Styling images */
+
+img
+{
+  display: block;
+
+  margin-left: auto;
+
+  margin-right: auto;
+
+  width: 50%;
+}
+
 /* Styling Nav bar */
 
 .topnav
