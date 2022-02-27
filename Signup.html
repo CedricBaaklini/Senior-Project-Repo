@@ -88,23 +88,25 @@
 
     <!--- PHP for sign up form --->
 
-    <?php
-
-
-
-    ?>
-
     <div class="topnav" id="myTopnav">
 
-      <a href="Welcome.html"> Home </a>
+      <a href="Welcome.html" class="active"> <i class="fa fa-fw fa-home"> </i> Home </a>
 
-      <a href="About.html"> About </a>
+      <a href="About.html"> <i class="fa-solid fa-address-card"></i> About </a>
 
-      <a href="News.html"> News </a>
+      <a href="News.html"> <i class="fa fa-newspaper"></i> News </a>
 
-      <a href="Login.html"> Log in </a>
+      <a href="Search.html"> <i class= "fa fa-fw fa-search"></i> Search </a>
 
-      <a href="Signup.html" class="active"> Sign up </a>
+      <a href="#"> <i class="fa-solid fa-hand-holding-dollar"></i> Donate </a>
+
+      <a href="Contact.html"> <i class="fa fa-fw fa-envelope"></i> Contact </a>
+
+      <a href="Login.html"> <i class="fa fa-fw fa-user"></i> Log in </a>
+
+      <a href="Signup.html"> <i class="fa-solid fa-user-plus"></i> Sign up </a>
+
+
 
 
       <a href="javascript:void(0);" class="icon" onclick="hover()">
@@ -115,7 +117,50 @@
 
     </div>
 
-    <form method="post" action="" style="border:1px solid: white">
+    <!--- PHP code for form starts here --->
+
+    <?php
+
+    $nameErr = $emailErr = "";
+    $name = $email = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    {
+      if (empty($POST["email"]))
+      {
+        $emailErr = "Email is required";
+      }
+
+      else
+      {
+        $email = test_input($_POST["email"]);
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+        {
+          $emailErr = "Invalid email format";
+        }
+      }
+
+      if (empty($_POST["name"]))
+      {
+        $nameErr = "Name is required";
+      }
+
+      else
+      {
+        $name = test_input($_POST["name"]);
+
+        if (!preg_match("/^[a-zA-Z-' ]*$/", $name))
+        {
+          $nameErr = "Only letters and white space allowed";
+        }
+      }
+
+    }
+
+    ?>
+
+    <form method="post" style="border:1px solid: white" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> ">
 
       <div class="container">
         <h1> Sign up </h1>
@@ -123,10 +168,10 @@
 
         <hr>
 
-        <label for="email"> <b> Email </b> </label>
+        <label for="email"> <b> Email </b> </label> <span class="error"> * <?php echo $emailErr; ?>  </span>
         <input type="text" placeholder="Enter Email" name="email" required>
 
-        <label for="username"> <b> Username </b> </label>
+        <label for="username"> <b> Username </b> </label> <span class="error"> * <?php echo $nameErr; ?>  </span>
         <input type="text" placeholder="Enter Username" name="username" required>
 
         <label for="psw"> <b> Password </b> </label>
