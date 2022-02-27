@@ -82,6 +82,7 @@
       }
     </style>
     <script type="text/javascript" src="Script.js">  </script>
+    <script src="https://kit.fontawesome.com/cf085a3950.js" crossorigin="anonymous"></script>
     <title> Sign up </title>
   </head>
   <body>
@@ -121,8 +122,8 @@
 
     <?php
 
-    $nameErr = $emailErr = "";
-    $name = $email = "";
+    $firstNameErr = $lastNameErr = $usernameErr = $emailErr = $passwordErr = $repeatErr = "";
+    $firstName = $lastName = $username = $email = $password = $repeat = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
@@ -130,7 +131,6 @@
       {
         $emailErr = "Email is required";
       }
-
       else
       {
         $email = test_input($_POST["email"]);
@@ -141,20 +141,21 @@
         }
       }
 
-      if (empty($_POST["name"]))
+      if (empty($_POST["username"]))
       {
-        $nameErr = "Name is required";
+        $nameErr = "Username is required";
       }
-
       else
       {
-        $name = test_input($_POST["name"]);
+        $name = test_input($_POST["username"]);
 
         if (!preg_match("/^[a-zA-Z-' ]*$/", $name))
         {
           $nameErr = "Only letters and white space allowed";
         }
       }
+
+
 
     }
 
@@ -168,10 +169,16 @@
 
         <hr>
 
-        <label for="email"> <b> Email </b> </label> <span class="error"> * <?php echo $emailErr; ?>  </span>
+        <label for="firstname"> <b> First Name </b> </label>
+        <input type="text" placeholder="Enter First Name" name="firstname" required>
+
+        <label for="lastname"> <b> Last Name </b> </label>
+        <input type="text" placeholder="Enter Last Name" name="lastname" required>
+
+        <label for="email"> <b> Email </b> </label> <span class="error"> <?php echo "*" + $emailErr; ?>  </span>
         <input type="text" placeholder="Enter Email" name="email" required>
 
-        <label for="username"> <b> Username </b> </label> <span class="error"> * <?php echo $nameErr; ?>  </span>
+        <label for="username"> <b> Username </b> </label> <span class="error"> <?php echo $usernameErr; ?>  </span>
         <input type="text" placeholder="Enter Username" name="username" required>
 
         <label for="psw"> <b> Password </b> </label>
