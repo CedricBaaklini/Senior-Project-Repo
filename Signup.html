@@ -127,6 +127,9 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
+
+      
+
       if (empty($POST["email"]))
       {
         $emailErr = "Email is required";
@@ -155,7 +158,14 @@
         }
       }
 
-
+      if (empty($_POST["psw"]))
+      {
+        $passwordErr = "Password is required";
+      }
+      else
+      {
+        $password = test_input($_POST["psw"]);
+      }
 
     }
 
