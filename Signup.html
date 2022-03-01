@@ -137,6 +137,15 @@
         $firstName = test_input($_POST["firstname"]);
       }
 
+      if (empty($_POST["lastname"]))
+      {
+        $lastNameErr = "Last Name is Required";
+      }
+      else
+      {
+        $lastName = test_input($_POST["lastname"]);
+      }
+
       if (empty($POST["email"]))
       {
         $emailErr = "Email is required";
@@ -198,7 +207,7 @@
         <label for="username"> <b> Username </b> </label> <span class="error"> <?php echo "*" + $usernameErr; ?>  </span>
         <input type="text" placeholder="Enter Username" name="username" required>
 
-        <label for="psw"> <b> Password </b> </label> 
+        <label for="psw"> <b> Password </b> </label>
         <input type="password" placeholder="Enter Password" name="psw" required>
 
         <label for="psw-repeat"> <b> Repeat Password </b> </label>
