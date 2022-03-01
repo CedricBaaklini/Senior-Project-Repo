@@ -128,7 +128,23 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
 
-      
+      if (empty($_POST["firstname"]))
+      {
+        $firstNameErr = "First Name is Required";
+      }
+      else
+      {
+        $firstName = test_input($_POST["firstname"]);
+      }
+
+      if (empty($_POST["lastname"]))
+      {
+        $lastNameErr = "Last Name is Required";
+      }
+      else
+      {
+        $lastName = test_input($_POST["lastname"]);
+      }
 
       if (empty($POST["email"]))
       {
@@ -188,7 +204,7 @@
         <label for="email"> <b> Email </b> </label> <span class="error"> <?php echo "*" + $emailErr; ?>  </span>
         <input type="text" placeholder="Enter Email" name="email" required>
 
-        <label for="username"> <b> Username </b> </label> <span class="error"> <?php echo $usernameErr; ?>  </span>
+        <label for="username"> <b> Username </b> </label> <span class="error"> <?php echo "*" + $usernameErr; ?>  </span>
         <input type="text" placeholder="Enter Username" name="username" required>
 
         <label for="psw"> <b> Password </b> </label>
