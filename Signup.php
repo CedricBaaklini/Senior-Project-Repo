@@ -91,24 +91,25 @@
 
     <div class="topnav" id="myTopnav">
 
-      <a href="Welcome.html"> <i class="fa fa-fw fa-home"> </i> Home </a>
+      <a href="Welcome.php"> <i class="fa fa-fw fa-home"> </i> Home </a>
 
-      <a href="About.html"> <i class="fa-solid fa-address-card"></i> About </a>
+      <a href="About.php" class="active"> <i class="fa-solid fa-address-card"></i> About </a>
 
-      <a href="News.html"> <i class="fa fa-newspaper"></i> News </a>
+      <a href="News.php"> <i class="fa fa-newspaper"></i> News </a>
 
-      <a href="Search.html"> <i class= "fa fa-fw fa-search"></i> Search </a>
+      <a href="Search.php"> <i class= "fa fa-fw fa-search"></i> Item Manager </a>
+		
+	  <a href="Searchdonation.php"> <i class= "fa fa-fw fa-search"></i> Donation Manager </a>	
 
-      <a href="#"> <i class="fa-solid fa-hand-holding-dollar"></i> Donate </a>
+      <a href="Donate.php"> <i class="fa-solid fa-hand-holding-dollar"></i> Donate </a>
 
-      <a href="Contact.html"> <i class="fa fa-fw fa-envelope"></i> Contact </a>
+      <a href="Contact.php"> <i class="fa fa-fw fa-envelope"></i> Contact </a>
 
-      <a href="Login.html"> <i class="fa fa-fw fa-user"></i> Log in </a>
+      <a href="Login.php"> <i class="fa fa-fw fa-user"></i> Log in </a>
 
-      <a href="Signup.html" class="active"> <i class="fa-solid fa-user-plus"></i> Sign up </a>
+      <a href="Signup.php"> <i class="fa-solid fa-user-plus"></i> Sign up </a>
 
-
-
+	<a href="logout.php"> <i class="fa-solid fa-user-minus"></i> Log Out </a>
 
       <a href="javascript:void(0);" class="icon" onclick="hover()">
 
@@ -119,77 +120,85 @@
     </div>
 
     <!--- PHP code for form starts here --->
+	<?php 
+		  $host_name = 'db5001054903.hosting-data.io';
+		  $database = 'dbs909100';
+		  $user_name = 'dbu323529';
+		  $password = 'YrrFEPgF3vrqQ4!';
 
-    <?php
+		  $link = new mysqli($host_name, $user_name, $password, $database);
 
-    require 'Connect.php';
+		  if ($link->connect_error) {
+			die('<p>Failed to connect to MySQL: '. $link->connect_error .'</p>');
+		  } else 
+		  {
+			//echo '<p>Connection to MySQL server successfully established.</p>';
+		  }
+	  	session_start();
+	  	if(isset($_SESSION["name"]))
+		{
+		  header('Location:https://carolinebronson.com/Senior%20Project/Welcome.php');//redirect the browser to the log in page
+		  exit();
+	  	}
+	  
+	?>
+<?php
 
-    $firstNameErr = $lastNameErr = $usernameErr = $emailErr = $passwordErr = $repeatErr = "";
-    $firstName = $lastName = $username = $email = $password = $repeat = "";
+    if(isset($_POST["submit"]))
+    { 	
+		
+		$errors="";
+		
+		if(!$_POST["psw"]===$_POST["psw-repeat"])
+		{
+			//if the passwords dont match
+			$errors .= "The passwords do not match.<br>";
+		}
+		
+		$sql = "SELECT id, user, pass FROM signin";
+		$result = $link->query($sql);
+		if ($result->num_rows > 0) {
+  		// output data of each row
+		while($row = $result->fetch_assoc()) {
+			if ($row["user"]===$_POST['username']) 
+			{
+				$errors .= "The username was used before<br>";
+			}
+		}
+		}
+		//echo $errors;
+		
+	}
+	  
+ ?>
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-
-      if (empty($_POST["firstname"]))
-      {
-        $firstNameErr = "First Name is Required";
-      }
-      else
-      {
-        $firstName = test_input($_POST["firstname"]);
-      }
-
-      if (empty($_POST["lastname"]))
-      {
-        $lastNameErr = "Last Name is Required";
-      }
-      else
-      {
-        $lastName = test_input($_POST["lastname"]);
-      }
-
-      if (empty($POST["email"]))
-      {
-        $emailErr = "Email is required";
-      }
-      else
-      {
-        $email = test_input($_POST["email"]);
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL))
-        {
-          $emailErr = "Invalid email format";
-        }
-      }
-
-      if (empty($_POST["username"]))
-      {
-        $nameErr = "Username is required";
-      }
-      else
-      {
-        $name = test_input($_POST["username"]);
-
-        if (!preg_match("/^[a-zA-Z-' ]*$/", $name))
-        {
-          $nameErr = "Only letters and white space allowed";
-        }
-      }
-
-      if (empty($_POST["psw"]))
-      {
-        $passwordErr = "Password is required";
-      }
-      else
-      {
-        $password = test_input($_POST["psw"]);
-      }
-
-    }
-
-    ?>
-
-    <form method="post" style="border:1px solid: white" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> ">
+	  	<?	   
+	  if(isset($_POST["submit"]))//submit button was clicked
+		{ //echo "form submitted<br>";
+		if(strlen($errors) > 0)
+		{
+			echo $errors;
+		}
+		else{
+			$fname=$_POST["firstname"];
+			$lastname=$_POST["lastname"];
+			$email=$_POST["email"];
+			$name=$_POST["username"];
+			$password=$_POST["psw"];
+		$sql = "INSERT INTO signin ( Fname, Lname , email , user, pass) VALUES ('$fname','$lastname','$email','$name', '$password')";
+	if(mysqli_query($link, $sql)){
+    	echo "Records inserted successfully.";
+		$_SESSION["password"] = $_POST["psw"];
+		$_SESSION["name"] = $_POST["username"];
+			} 	
+		else{
+			echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+			}
+		}
+	  }
+?>
+	  
+    <form method="post" style="border:1px solid: white">
 
       <div class="container">
 
@@ -204,10 +213,10 @@
         <label for="lastname"> <b> Last Name </b> </label>
         <input type="text" placeholder="Enter Last Name" name="lastname" required>
 
-        <label for="email"> <b> Email </b> </label> <span class="error"> <?php echo "*" + $emailErr; ?>  </span>
+        <label for="email"> <b> Email </b> </label> 
         <input type="text" placeholder="Enter Email" name="email" required>
 
-        <label for="username"> <b> Username </b> </label> <span class="error"> <?php echo "*" + $usernameErr; ?>  </span>
+        <label for="username"> <b> Username </b> </label> 
         <input type="text" placeholder="Enter Username" name="username" required>
 
         <label for="psw"> <b> Password </b> </label>
@@ -228,17 +237,10 @@
       <div class="clearfix">
 
         <button type="button" class="cancelbtn"> Cancel </button>
-        <button type="button" class="signupbtn"> Sign Up </button>
+		<button type="submit"  class="signupbtn" name="submit" formmethod="post"> Sign up </button>
+		  
 
       </div>
-
-    </form>
-
-    <?php
-
-    //Code for inserting the data into the database
-
-    ?>
-
+	</form>
   </body>
 </html>
